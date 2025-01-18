@@ -109,20 +109,6 @@ class _UserFormPageState extends State<UserFormPage> {
                 onSaved: (value) => email = value!,
               ),
               const SizedBox(height: 10),
-              _buildTextFormField(
-                labelText: 'Email',
-                initialValue: email,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) return 'Enter an email';
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Enter a valid email';
-                  }
-                  return null;
-                },
-                onSaved: (value) => email = value!,
-              ),
-              const SizedBox(height: 10),
               _buildDropdownButtonFormField(
                 labelText: 'Gender',
                 value: gender,
