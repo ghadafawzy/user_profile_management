@@ -66,6 +66,19 @@ class _UserListPageState extends State<UserListPage> {
                   await ApiService().deleteUser(users[index].id!);
                   setState(fetchUsers);
                 },
+                onEdit: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserFormPage(
+                        user: users[index],
+                        isEditing: true,
+                      ),
+                    ),
+                  ).then((_) {
+                    setState(fetchUsers);
+                  });
+                },
                 onTap: () {
                   Navigator.push(
                     context,

@@ -18,9 +18,7 @@ The app includes advanced features like caching, error handling, and a responsiv
 ---
 
 ## Screens
-1. User List Page: Displays a responsive list of all user profiles with options to add,delete users.
-2. User Details Page: Shows details of a selected user and contain button to edit user.
-3. User Form Page: Form for creating or editing user profiles.
+| <img src="1.jpeg" width="250"> | <img src="2.jpeg" width="250"> | <img src="3.jpeg" width="250"> | <img src="4.jpeg" width="250"> |
 
 ---
 
