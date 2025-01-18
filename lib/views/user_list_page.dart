@@ -3,7 +3,7 @@ import 'package:user_profile_management/views/user_details_page.dart';
 import 'package:user_profile_management/views/user_form_page.dart';
 import '../models/user_model.dart';
 import '../services/user_service.dart';
-
+import '../widgets/user_card.dart';
 
 class UserListPage extends StatefulWidget {
   const UserListPage({super.key});
@@ -40,8 +40,8 @@ class _UserListPageState extends State<UserListPage> {
                   builder: (context) => const UserFormPage(isEditing: false),
                 ),
               ).then((_) => setState(() {
-                fetchUsers();
-              }));
+                    fetchUsers;
+                  }));
             },
           ),
         ],
@@ -60,27 +60,21 @@ class _UserListPageState extends State<UserListPage> {
           return ListView.builder(
             itemCount: users.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(users[index].name),
-                subtitle: Text(users[index].email),
-                trailing: IconButton(
-                  icon: const Icon(Icons.delete, color: Colors.red),
-                  onPressed: () async {
-                    await ApiService().deleteUser(users[index].id!);
-                    setState(() {
-                      fetchUsers();
-                    });
-                  },
-                ),
+              return UserCard(
+                user: users[index],
+                onDelete: () async {
+                  await ApiService().deleteUser(users[index].id!);
+                  setState(fetchUsers);
+                },
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => UserDetailsPage(user: users[index]),
                     ),
-                  ).then((_) => setState(() {
-                    fetchUsers();
-                  }));
+                  ).then((_) {
+                    setState(fetchUsers);
+                  });
                 },
               );
             },

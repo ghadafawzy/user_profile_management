@@ -23,6 +23,10 @@ class _UserFormPageState extends State<UserFormPage> {
   @override
   void initState() {
     super.initState();
+    _initializeUserDetails();
+  }
+
+  void _initializeUserDetails() {
     if (widget.isEditing && widget.user != null) {
       name = widget.user!.name;
       email = widget.user!.email;
@@ -83,19 +87,17 @@ class _UserFormPageState extends State<UserFormPage> {
           key: formKey,
           child: ListView(
             children: [
-              TextFormField(
+              _buildTextFormField(
+                labelText: 'Name',
                 initialValue: name,
-                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) =>
                 value == null || value.isEmpty ? 'Enter a name' : null,
-                onSaved: (value) {
-                  name = value!;
-                },
+                onSaved: (value) => name = value!,
               ),
               const SizedBox(height: 10),
-              TextFormField(
+              _buildTextFormField(
+                labelText: 'Email',
                 initialValue: email,
-                decoration: const InputDecoration(labelText: 'Email'),
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.isEmpty) return 'Enter an email';
@@ -104,43 +106,51 @@ class _UserFormPageState extends State<UserFormPage> {
                   }
                   return null;
                 },
-                onSaved: (value) {
-                  email = value!;
-                },
+                onSaved: (value) => email = value!,
               ),
               const SizedBox(height: 10),
-              DropdownButtonFormField<String>(
+              _buildTextFormField(
+                labelText: 'Name',
+                initialValue: name,
+                validator: (value) =>
+                value == null || value.isEmpty ? 'Enter a name' : null,
+                onSaved: (value) => name = value!,
+              ),
+              const SizedBox(height: 10),
+              _buildTextFormField(
+                labelText: 'Email',
+                initialValue: email,
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) return 'Enter an email';
+                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
+                    return 'Enter a valid email';
+                  }
+                  return null;
+                },
+                onSaved: (value) => email = value!,
+              ),
+              const SizedBox(height: 10),
+              _buildDropdownButtonFormField(
+                labelText: 'Gender',
                 value: gender,
-                decoration: const InputDecoration(labelText: 'Gender'),
                 items: const [
                   DropdownMenuItem(value: 'male', child: Text('Male')),
                   DropdownMenuItem(value: 'female', child: Text('Female')),
                 ],
-                onChanged: (value) {
-                  setState(() {
-                    gender = value!;
-                  });
-                },
-                onSaved: (value) {
-                  gender = value!;
-                },
+                onChanged: (value) => setState(() => gender = value!),
+                onSaved: (value) => gender = value!,
               ),
               const SizedBox(height: 10),
-              DropdownButtonFormField<String>(
+              _buildDropdownButtonFormField(
+                labelText: 'Status',
                 value: status,
-                decoration: const InputDecoration(labelText: 'Status'),
                 items: const [
                   DropdownMenuItem(value: 'active', child: Text('Active')),
                   DropdownMenuItem(value: 'inactive', child: Text('Inactive')),
                 ],
-                onChanged: (value) {
-                  setState(() {
-                    status = value!;
-                  });
-                },
-                onSaved: (value) {
-                  status = value!;
-                },
+                onChanged: (value) => setState(() => status = value!),
+                onSaved: (value) => status = value!,
               ),
               const SizedBox(height: 20),
               ElevatedButton(
@@ -151,6 +161,37 @@ class _UserFormPageState extends State<UserFormPage> {
           ),
         ),
       ),
+    );
+  }
+  Widget _buildTextFormField({
+    required String labelText,
+    String? initialValue,
+    TextInputType keyboardType = TextInputType.text,
+    FormFieldValidator<String>? validator,
+    FormFieldSetter<String>? onSaved,
+  }) {
+    return TextFormField(
+      initialValue: initialValue,
+      decoration: InputDecoration(labelText: labelText),
+      keyboardType: keyboardType,
+      validator: validator,
+      onSaved: onSaved,
+    );
+  }
+
+  Widget _buildDropdownButtonFormField({
+    required String labelText,
+    required String value,
+    required List<DropdownMenuItem<String>> items,
+    ValueChanged<String?>? onChanged,
+    FormFieldSetter<String>? onSaved,
+  }) {
+    return DropdownButtonFormField<String>(
+      value: value,
+      decoration: InputDecoration(labelText: labelText),
+      items: items,
+      onChanged: onChanged,
+      onSaved: onSaved,
     );
   }
 }

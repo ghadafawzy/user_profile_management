@@ -4,8 +4,9 @@ import '../models/user_model.dart';
 class UserCard extends StatelessWidget {
   final User user;
   final VoidCallback onDelete;
+  final VoidCallback onTap;
 
-  const UserCard({super.key, required this.user, required this.onDelete});
+  const UserCard({super.key, required this.user, required this.onDelete , required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +19,7 @@ class UserCard extends StatelessWidget {
           icon: const Icon(Icons.delete, color: Colors.red),
           onPressed: onDelete,
         ),
+        onTap: onTap,
       ),
     );
   }
