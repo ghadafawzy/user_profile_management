@@ -19,16 +19,10 @@ class UserDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Name: ${user.name}',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            Text('Email: ${user.email}', style: const TextStyle(fontSize: 16)),
-            const SizedBox(height: 10),
-            Text('Gender: ${user.gender}', style: const TextStyle(fontSize: 16)),
-            const SizedBox(height: 10),
-            Text('Status: ${user.status}', style: const TextStyle(fontSize: 16)),
+            _buildUserInfo('Name', user.name),
+            _buildUserInfo('Email', user.email),
+            _buildUserInfo('Gender', user.gender),
+            _buildUserInfo('Status', user.status),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -45,6 +39,19 @@ class UserDetailsPage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildUserInfo(String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          '$label: $value',
+          style: const TextStyle(fontSize: 16),
+        ),
+        const SizedBox(height: 10),
+      ],
     );
   }
 }
