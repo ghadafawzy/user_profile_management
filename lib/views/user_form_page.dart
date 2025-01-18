@@ -7,8 +7,7 @@ class UserFormPage extends StatefulWidget {
   final User? user;
   final bool isEditing;
 
-  const UserFormPage({Key? key, this.user, required this.isEditing})
-      : super(key: key);
+  const UserFormPage({super.key, this.user, required this.isEditing});
 
   @override
   _UserFormPageState createState() => _UserFormPageState();

@@ -5,17 +5,17 @@ class UserCard extends StatelessWidget {
   final User user;
   final VoidCallback onDelete;
 
-  UserCard({required this.user, required this.onDelete});
+  const UserCard({super.key, required this.user, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(8),
+      margin: const EdgeInsets.all(8),
       child: ListTile(
         title: Text(user.name),
         subtitle: Text(user.email),
         trailing: IconButton(
-          icon: Icon(Icons.delete, color: Colors.red),
+          icon: const Icon(Icons.delete, color: Colors.red),
           onPressed: onDelete,
         ),
       ),

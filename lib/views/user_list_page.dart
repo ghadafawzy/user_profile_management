@@ -6,6 +6,8 @@ import '../services/user_service.dart';
 
 
 class UserListPage extends StatefulWidget {
+  const UserListPage({super.key});
+
   @override
   _UserListPageState createState() => _UserListPageState();
 }
