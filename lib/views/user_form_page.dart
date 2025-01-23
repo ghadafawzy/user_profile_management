@@ -57,19 +57,19 @@ class _UserFormPageState extends State<UserFormPage> {
           // Only update if editing=true
           await ApiService().updateUser(user.id!, user);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('User updated successfully!')),
-          );
+            const SnackBar(content: Text('User updated successfully!'),backgroundColor: Colors.green,),
+    );
         } else {
           // Create new user
           await ApiService().createUser(user);
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('User created successfully!')),
+            const SnackBar(content: Text('User created successfully!'),backgroundColor: Colors.green),
           );
         }
         Navigator.pop(context);
       } catch (e) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to save user: $e')),
+          SnackBar(content: Text('Failed to save user: $e'),backgroundColor: Colors.red),
         );
       }
     }
@@ -87,28 +87,6 @@ class _UserFormPageState extends State<UserFormPage> {
           key: formKey,
           child: ListView(
             children: [
-              _buildTextFormField(
-                labelText: 'Name',
-                initialValue: name,
-                validator: (value) =>
-                value == null || value.isEmpty ? 'Enter a name' : null,
-                onSaved: (value) => name = value!,
-              ),
-              const SizedBox(height: 10),
-              _buildTextFormField(
-                labelText: 'Email',
-                initialValue: email,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.isEmpty) return 'Enter an email';
-                  if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
-                    return 'Enter a valid email';
-                  }
-                  return null;
-                },
-                onSaved: (value) => email = value!,
-              ),
-              const SizedBox(height: 10),
               _buildTextFormField(
                 labelText: 'Name',
                 initialValue: name,

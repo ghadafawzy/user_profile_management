@@ -23,19 +23,6 @@ class UserDetailsPage extends StatelessWidget {
             _buildUserInfo('Email', user.email),
             _buildUserInfo('Gender', user.gender),
             _buildUserInfo('Status', user.status),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        UserFormPage(user: user, isEditing: true),
-                  ),
-                ).then((_) => Navigator.pop(context));
-              },
-              child: const Text('Edit User'),
-            ),
           ],
         ),
       ),
